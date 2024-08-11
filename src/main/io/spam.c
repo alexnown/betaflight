@@ -2,6 +2,7 @@
 #include "io/serial.h"
 
 static serialPort_t *spamPort;
+uint8_t _counter;
 
 void spamInit(void) {
     /*
@@ -19,19 +20,26 @@ void spamInit(void) {
     }
     dprintf(("smartAudioInit: OK\r\n")); */
     // no callback - buffer will be consumed in gpsUpdate()
-    spamPort = openSerialPort(SERIAL_PORT_UART4, FUNCTION_NONE, NULL, NULL, SPAM_BAUDRATE, MODE_RXTX, 0);
+    _counter=42;
+    spamPort = openSerialPort(SERIAL_PORT_UART3, FUNCTION_RX_SERIAL, spamDataReceive, NULL, SPAM_BAUDRATE, MODE_RXTX, 0);
     if (!spamPort) {
         return;
     }
     
 }
 
+static void spamDataReceive(uint16_t c, void *data)
+{
+    UNUSED(c);
+    UNUSED(data);
+    _counter++;
+}
+
 void spamUpdate(timeUs_t currentTimeUs) {
+    UNUSED(currentTimeUs);
 if (!spamPort) {
         return;
     }
-    serialWriteBuf(spamPort, (uint8_t *)"Hallo\r\n", 7);
-    if(currentTimeUs == 0) {
-        return;
-    }
+    serialWrite(spamPort, _counter);
+    //serialWriteBuf(spamPort, (uint8_t *)"Hallo\r\n", 7);
 }
