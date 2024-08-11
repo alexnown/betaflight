@@ -72,6 +72,7 @@
 #include "io/rcdevice_cam.h"
 #include "io/usb_cdc_hid.h"
 #include "io/vtx.h"
+#include "io/spam.h"
 
 #include "msp/msp.h"
 #include "msp/msp_serial.h"

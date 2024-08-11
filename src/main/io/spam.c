@@ -1,4 +1,5 @@
 #include "spam.h"
+#include "io/serial.h"
 
 static serialPort_t *spamPort;
 
