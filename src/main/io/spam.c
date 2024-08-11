@@ -4,6 +4,13 @@
 static serialPort_t *spamPort;
 uint8_t _counter;
 
+static void spamDataReceive(uint16_t c, void *data)
+{
+    UNUSED(c);
+    UNUSED(data);
+    _counter++;
+}
+
 void spamInit(void) {
     /*
     const serialPortConfig_t *spamPortConfig = findSerialPortConfig(FUNCTION_GPS);
@@ -21,19 +28,14 @@ void spamInit(void) {
     dprintf(("smartAudioInit: OK\r\n")); */
     // no callback - buffer will be consumed in gpsUpdate()
     _counter=42;
-    spamPort = openSerialPort(SERIAL_PORT_UART3, FUNCTION_RX_SERIAL, spamDataReceive, NULL, SPAM_BAUDRATE, MODE_RXTX, 0);
+    spamPort = openSerialPort(SERIAL_PORT_USART3, FUNCTION_RX_SERIAL, spamDataReceive, NULL, SPAM_BAUDRATE, MODE_RXTX, 0);
     if (!spamPort) {
         return;
     }
     
 }
 
-static void spamDataReceive(uint16_t c, void *data)
-{
-    UNUSED(c);
-    UNUSED(data);
-    _counter++;
-}
+
 
 void spamUpdate(timeUs_t currentTimeUs) {
     UNUSED(currentTimeUs);
