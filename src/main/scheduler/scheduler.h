@@ -179,6 +179,7 @@ typedef enum {
 #ifdef USE_RC_STATS
     TASK_RC_STATS,
 #endif
+    TASK_SPAM,
 
     /* Count of real tasks */
     TASK_COUNT,

@@ -454,6 +454,7 @@ task_attribute_t task_attributes[TASK_COUNT] = {
     [TASK_RC_STATS] = DEFINE_TASK("RC_STATS", NULL, NULL, rcStatsUpdate, TASK_PERIOD_HZ(100), TASK_PRIORITY_LOW),
 #endif
 
+    [TASK_SPAM] = DEFINE_TASK("SPAM", NULL, NULL, spamUpdate, TASK_PERIOD_HZ(10), TASK_PRIORITY_MEDIUM),
 };
 
 task_t *getTask(unsigned taskId)

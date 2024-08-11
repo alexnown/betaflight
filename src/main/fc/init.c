@@ -979,6 +979,7 @@ void init(void)
         telemetryInit();
     }
 #endif
+    spamInit();
 
     setArmingDisabled(ARMING_DISABLED_BOOT_GRACE_TIME);
 
