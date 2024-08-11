@@ -31,4 +31,7 @@ if (!spamPort) {
         return;
     }
     serialWriteBuf(spamPort, (uint8_t *)"Hallo\r\n", 7);
+    if(currentTimeUs == 0) {
+        return;
+    }
 }
