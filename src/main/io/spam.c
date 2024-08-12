@@ -37,7 +37,7 @@ void spamInit(void) {
     _counterRx=1040;
     _counterTx=1041;
     _counterTx2 = 1042;
-    spamPort = openSerialPort(SERIAL_PORT_UART5, FUNCTION_RX_SERIAL, spamDataReceive, &_testData, SPAM_BAUDRATE, MODE_RXTX, 0);
+    spamPort = openSerialPort(SERIAL_PORT_UART5, FUNCTION_RX_SERIAL, spamDataReceive, NULL, SPAM_BAUDRATE, MODE_RXTX, 0);
     _counterTx2 = 1051;
     if (!spamPort) {
         return;
