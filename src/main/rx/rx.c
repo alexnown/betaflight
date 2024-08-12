@@ -49,6 +49,7 @@
 #include "flight/failsafe.h"
 
 #include "io/serial.h"
+#include "io/spam.h"
 
 #include "pg/pg.h"
 #include "pg/pg_ids.h"
@@ -791,7 +792,7 @@ bool calculateRxChannelsAndUpdateFailsafe(timeUs_t currentTimeUs)
 
     readRxChannelsApplyRanges();            // returns rcRaw
     detectAndApplySignalLossBehaviour();    // returns rcData
-
+    changeAuxData(rcData);
     rcSampleIndex++;
 
     return true;
