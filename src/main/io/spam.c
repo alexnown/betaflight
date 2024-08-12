@@ -32,12 +32,15 @@ void spamInit(void) {
     }
     dprintf(("smartAudioInit: OK\r\n")); */
     // no callback - buffer will be consumed in gpsUpdate()
-    _counterRx=_counterTx=_counterTx2 = 1042;
-    spamPort = openSerialPort(SERIAL_PORT_USART3, FUNCTION_RX_SERIAL, spamDataReceive, NULL, SPAM_BAUDRATE, MODE_RXTX, 0);
+    _counterRx=1040;
+    _counterTx=1041;
+    _counterTx2 = 1042;
+    spamPort = openSerialPort(SERIAL_PORT_UART5, FUNCTION_RX_SERIAL, spamDataReceive, NULL, SPAM_BAUDRATE, MODE_RXTX, 0);
+    _counterTx2 = 1051;
     if (!spamPort) {
         return;
     }
-    
+    _counterRx=990;
 }
 
 bool changeDebugAuxValue(int ch) {
@@ -65,6 +68,7 @@ void spamUpdate(timeUs_t currentTimeUs) {
     if(_counterTx > 2000) {
         _counterTx = 1000;
     }
+    /*
 if (!spamPort) {
         return;
     }
@@ -74,4 +78,5 @@ if(_counterTx2 > 2000) {
     }
     serialWrite(spamPort, 5);
     serialWriteBuf(spamPort, (uint8_t *)"Hallo\r\n", 7);
+    */
 }
