@@ -1,5 +1,5 @@
 #pragma once
-
+#include <stdio.h>
 #include "common/time.h"
 
 #define SPAM_BAUDRATE 38400
