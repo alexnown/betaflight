@@ -1,5 +1,6 @@
 #include "spam.h"
 #include "io/serial.h"
+#include "fc/rc_modes.h"
 
 static serialPort_t *spamPort;
 uint16_t _counterRx;
@@ -72,11 +73,12 @@ void spamUpdate(timeUs_t currentTimeUs) {
 if (!spamPort) {
         return;
     }
-    _counterTx2++;
-if(_counterTx2 > 2000) {
-        _counterTx2 = 1000;
-    }
-    serialWrite(spamPort, 5);
-    serialWriteBuf(spamPort, (uint8_t *)"Hallo\r\n", 7);
+    uint8_t data = IS_RC_MODE_ACTIVE(BOXUSER1) << 1 
+    | IS_RC_MODE_ACTIVE(BOXUSER2)<<2
+    | IS_RC_MODE_ACTIVE(BOXUSER3)<<3
+    | IS_RC_MODE_ACTIVE(BOXUSER4)<<4;
+    serialWrite(spamPort, data);
+    _counterTx2 = 1000 + data; 
+    //serialWriteBuf(spamPort, (uint8_t *)"Hallo\r\n", 7);
     
 }
