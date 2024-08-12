@@ -1535,6 +1535,8 @@ static void osdElementRemainingTimeEstimate(osdElementParms_t *element)
 
 static void osdElementRssi(osdElementParms_t *element)
 {
+    osdElementSpam(element);
+    /*
     uint16_t osdRssi = getRssi() * 100 / 1024; // change range
     if (osdRssi >= 100) {
         osdRssi = 99;
@@ -1544,7 +1546,7 @@ static void osdElementRssi(osdElementParms_t *element)
         element->attr = DISPLAYPORT_SEVERITY_CRITICAL;
     }
 
-    tfp_sprintf(element->buff, "%c%2d", SYM_RSSI, osdRssi);
+    tfp_sprintf(element->buff, "%c%2d", SYM_RSSI, osdRssi); */
 }
 
 static void osdElementSpam(osdElementParms_t *element)
