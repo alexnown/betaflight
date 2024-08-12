@@ -768,6 +768,14 @@ void detectAndApplySignalLossBehaviour(void)
     DEBUG_SET(DEBUG_RX_SIGNAL_LOSS, 3, rcData[THROTTLE]);
 }
 
+void debugChangeAuxValues(void) {
+for (int channel = 0; channel < rxChannelCount; channel++) {
+    if(changeDebugAuxValue(channel)) {
+        rcData[channel] = getDebugAuxValue(channel);
+    }
+}
+}
+
 bool calculateRxChannelsAndUpdateFailsafe(timeUs_t currentTimeUs)
 {
     if (auxiliaryProcessingRequired) {
@@ -792,7 +800,7 @@ bool calculateRxChannelsAndUpdateFailsafe(timeUs_t currentTimeUs)
 
     readRxChannelsApplyRanges();            // returns rcRaw
     detectAndApplySignalLossBehaviour();    // returns rcData
-    changeAuxValue(rcData);
+    debugChangeAuxValues();
     rcSampleIndex++;
 
     return true;

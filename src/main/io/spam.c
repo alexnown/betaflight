@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "spam.h"
 #include "io/serial.h"
 
@@ -41,12 +40,23 @@ void spamInit(void) {
     
 }
 
-void changeAuxValue(float rcData[]) {
-    //int length = sizeof(rcData) / sizeof(rcData[0]);
-    rcData[5] = 1333;
-        rcData[6] = _counterRx;
-        rcData[7] = _counterTx;
-        rcData[8] = _counterTx2;
+bool changeDebugAuxValue(int ch) {
+    return ch>=5 && ch<=8;
+}
+float getDebugAuxValue(int ch) {
+    switch (ch)
+    {
+    case 5:
+        return 1333;
+    case 6:
+    return  _counterRx;
+    case 7:
+    return  _counterTx;
+    case 8:
+    return  _counterTx2;
+    default:
+        return 999;
+    }
 }
 
 void spamUpdate(timeUs_t currentTimeUs) {
