@@ -1549,7 +1549,7 @@ static void osdElementRssi(osdElementParms_t *element)
 
 static void osdElementSpam(osdElementParms_t *element)
 {
-    uint16_t state = getOSDState();
+    uint16_t state = getSpamOSDState();
     switch (state)
     {
     case 2:
