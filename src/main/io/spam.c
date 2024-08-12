@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "spam.h"
 #include "io/serial.h"
 
