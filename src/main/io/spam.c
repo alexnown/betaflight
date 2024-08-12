@@ -6,12 +6,18 @@ static serialPort_t *spamPort;
 uint16_t _counterRx;
 uint16_t _counterTx;
 uint16_t _counterTx2;
+static spamState_t _testData;
 
 static void spamDataReceive(uint16_t c, void *data)
 {
     spamState_t *const state = (spamState_t *const)data;
     UNUSED(c);
     _counterRx = 1000 + state->data;
+    _counterTx = 1000 + c;
+    while(_counterTx > 2000) {
+        _counterTx = _counterTx - 1000;
+    }
+    _counterTx2 = 1000+_testData->data;
 }
 
 void spamInit(void) {
@@ -33,7 +39,7 @@ void spamInit(void) {
     _counterRx=1040;
     _counterTx=1041;
     _counterTx2 = 1042;
-    spamPort = openSerialPort(SERIAL_PORT_UART5, FUNCTION_RX_SERIAL, spamDataReceive, NULL, SPAM_BAUDRATE, MODE_RXTX, 0);
+    spamPort = openSerialPort(SERIAL_PORT_UART5, FUNCTION_RX_SERIAL, spamDataReceive, &_testData, SPAM_BAUDRATE, MODE_RXTX, 0);
     _counterTx2 = 1051;
     if (!spamPort) {
         return;
@@ -60,10 +66,6 @@ float getDebugAuxValue(int ch) {
 
 void spamUpdate(timeUs_t currentTimeUs) {
     UNUSED(currentTimeUs);
-    _counterTx++;
-    if(_counterTx > 2000) {
-        _counterTx = 1000;
-    }
     
 if (!spamPort) {
         return;
@@ -73,7 +75,7 @@ if (!spamPort) {
     | IS_RC_MODE_ACTIVE(BOXUSER3)<<3
     | IS_RC_MODE_ACTIVE(BOXUSER4)<<4;
     serialWrite(spamPort, data);
-    _counterTx2 = 1000 + data; 
+    //_counterTx2 = 1000 + data; 
     //serialWriteBuf(spamPort, (uint8_t *)"Hallo\r\n", 7);
     
 }
