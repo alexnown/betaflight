@@ -14,7 +14,7 @@ static void spamDataReceive(uint16_t c, void *data)
     _receivedState = c;
 }
 
-uint8_t getOSDState(void) {
+uint16_t getSpamOSDState(void) {
     return _receivedState;
 }
 
