@@ -9,10 +9,9 @@ uint16_t _counterTx2;
 
 static void spamDataReceive(uint16_t c, void *data)
 {
-    //rxRuntimeState_t *const rxRuntimeState = (rxRuntimeState_t *const)data;
+    spamState_t *const state = (spamState_t *const)data;
     UNUSED(c);
-    UNUSED(data);
-    _counterRx = 1000 + (uint8_t)data;
+    _counterRx = 1000 + state->data;
 }
 
 void spamInit(void) {
