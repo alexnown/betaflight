@@ -17,7 +17,7 @@ static void spamDataReceive(uint16_t c, void *data)
     while(_counterTx > 2000) {
         _counterTx = _counterTx - 1000;
     }
-    _counterTx2 = 1000+_testData->data;
+    _counterTx2 = 1000+_testData.data;
 }
 
 void spamInit(void) {
