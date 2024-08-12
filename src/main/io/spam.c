@@ -41,7 +41,7 @@ void spamInit(void) {
     
 }
 
-void changeAuxValue(float [] rcData) {
+void changeAuxValue(float rcData[]) {
     int length = sizeof(rcData) / sizeof(rcData[0]);
     if(length >=8) {
         rcData[5] = 1333;

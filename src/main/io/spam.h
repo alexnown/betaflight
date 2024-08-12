@@ -6,4 +6,4 @@
 
 void spamInit(void);
 void spamUpdate(timeUs_t currentTimeUs);
-void changeAuxValue(float [] rcData);
+void changeAuxValue(float rcData[]);
