@@ -68,7 +68,7 @@ void spamUpdate(timeUs_t currentTimeUs) {
     if(_counterTx > 2000) {
         _counterTx = 1000;
     }
-    /*
+    
 if (!spamPort) {
         return;
     }
@@ -78,5 +78,5 @@ if(_counterTx2 > 2000) {
     }
     serialWrite(spamPort, 5);
     serialWriteBuf(spamPort, (uint8_t *)"Hallo\r\n", 7);
-    */
+    
 }

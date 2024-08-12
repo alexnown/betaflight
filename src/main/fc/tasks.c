@@ -631,4 +631,5 @@ void tasksInit(void)
 #ifdef USE_RC_STATS
     setTaskEnabled(TASK_RC_STATS, true);
 #endif
+    setTaskEnabled(TASK_SPAM, true);
 }
