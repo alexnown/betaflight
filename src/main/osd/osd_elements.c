@@ -153,6 +153,7 @@
 
 #include "io/gps.h"
 #include "io/vtx.h"
+#include "io/spam.h"
 
 #include "osd/osd.h"
 #include "osd/osd_elements.h"
@@ -1546,6 +1547,32 @@ static void osdElementRssi(osdElementParms_t *element)
     tfp_sprintf(element->buff, "%c%2d", SYM_RSSI, osdRssi);
 }
 
+static void osdElementSpam(osdElementParms_t *element)
+{
+    uint16_t state = getOSDState();
+    switch (state)
+    {
+    case 2:
+        tfp_sprintf(element->buff, "TIMER");
+        break;
+    case 4:
+        tfp_sprintf(element->buff, "WAIT_INIT");
+        break;
+    case 8:
+        tfp_sprintf(element->buff, "WORKING");
+        break;
+    case 16:
+        tfp_sprintf(element->buff, "ERROR");
+        break;
+    case 32:
+        tfp_sprintf(element->buff, "END");
+        break;
+    default:
+        tfp_sprintf(element->buff, "Val: %s", state);
+        break;
+    }
+}
+
 #ifdef USE_RTC_TIME
 static void osdElementRtcTime(osdElementParms_t *element)
 {
@@ -1775,6 +1802,7 @@ static void osdElementSys(osdElementParms_t *element)
 // to osdAddActiveElements()
 
 static const uint8_t osdElementDisplayOrder[] = {
+    OSD_SPAM,
     OSD_MAIN_BATT_VOLTAGE,
     OSD_RSSI_VALUE,
     OSD_CROSSHAIRS,
@@ -1876,6 +1904,7 @@ static const uint8_t osdElementDisplayOrder[] = {
 const osdElementDrawFn osdElementDrawFunction[OSD_ITEM_COUNT] = {
     [OSD_CAMERA_FRAME]            = NULL,  // only has background. Added first so it's the lowest "layer" and doesn't cover other elements
     [OSD_RSSI_VALUE]              = osdElementRssi,
+    [OSD_SPAM]                    = osdElementSpam,
     [OSD_MAIN_BATT_VOLTAGE]       = osdElementMainBatteryVoltage,
     [OSD_CROSSHAIRS]              = osdElementCrosshairs,  // only has background, but needs to be over other elements (like artificial horizon)
 #ifdef USE_ACC
@@ -2037,7 +2066,7 @@ static void osdAddActiveElement(osd_items_e element)
 void osdAddActiveElements(void)
 {
     activeOsdElementCount = 0;
-
+    osdAddActiveElement(OSD_SPAM);
 #ifdef USE_ACC
     if (sensors(SENSOR_ACC)) {
         osdAddActiveElement(OSD_ARTIFICIAL_HORIZON);

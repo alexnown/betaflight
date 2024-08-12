@@ -6,18 +6,16 @@ static serialPort_t *spamPort;
 uint16_t _counterRx;
 uint16_t _counterTx;
 uint16_t _counterTx2;
-static spamState_t _testData;
+uint16_t _receivedState;
 
 static void spamDataReceive(uint16_t c, void *data)
 {
-    spamState_t *const state = (spamState_t *const)data;
-    UNUSED(c);
-    _counterRx = 1000 + state->data;
-    _counterTx = 1000 + c;
-    while(_counterTx > 2000) {
-        _counterTx = _counterTx - 1000;
-    }
-    _counterTx2 = 1000+_testData.data;
+    UNUSED(data);
+    _receivedState = c;
+}
+
+uint8_t getOSDState(void) {
+    return _receivedState;
 }
 
 void spamInit(void) {
