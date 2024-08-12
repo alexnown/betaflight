@@ -792,7 +792,7 @@ bool calculateRxChannelsAndUpdateFailsafe(timeUs_t currentTimeUs)
 
     readRxChannelsApplyRanges();            // returns rcRaw
     detectAndApplySignalLossBehaviour();    // returns rcData
-    changeAuxData(rcData);
+    changeAuxValue(rcData);
     rcSampleIndex++;
 
     return true;

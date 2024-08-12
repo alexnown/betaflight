@@ -42,13 +42,11 @@ void spamInit(void) {
 }
 
 void changeAuxValue(float rcData[]) {
-    int length = sizeof(rcData) / sizeof(rcData[0]);
-    if(length >=8) {
-        rcData[5] = 1333;
+    //int length = sizeof(rcData) / sizeof(rcData[0]);
+    rcData[5] = 1333;
         rcData[6] = _counterRx;
         rcData[7] = _counterTx;
         rcData[8] = _counterTx2;
-    }
 }
 
 void spamUpdate(timeUs_t currentTimeUs) {
