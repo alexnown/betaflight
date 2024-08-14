@@ -1535,29 +1535,6 @@ static void osdElementRemainingTimeEstimate(osdElementParms_t *element)
 
 static void osdElementRssi(osdElementParms_t *element)
 {
-    uint16_t state = getSpamOSDState();
-    switch (state)
-    {
-    case 2:
-        tfp_sprintf(element->buff, "TIMER");
-        break;
-    case 4:
-        tfp_sprintf(element->buff, "WAIT_INIT");
-        break;
-    case 8:
-        tfp_sprintf(element->buff, "WORKING");
-        break;
-    case 16:
-        tfp_sprintf(element->buff, "ERROR");
-        break;
-    case 32:
-        tfp_sprintf(element->buff, "END");
-        break;
-    default:
-        tfp_sprintf(element->buff, "Val: %s", state);
-        break;
-    }
-    /*
     uint16_t osdRssi = getRssi() * 100 / 1024; // change range
     if (osdRssi >= 100) {
         osdRssi = 99;
@@ -1572,7 +1549,8 @@ static void osdElementRssi(osdElementParms_t *element)
 
 static void osdElementSpam(osdElementParms_t *element)
 {
-    uint16_t state = getSpamOSDState();
+    tfp_sprintf(element->buff, "Val: %s, %c", spamConfig()->value, spamConfig()->value2);
+    /*uint16_t state = getSpamOSDState();
     switch (state)
     {
     case 2:
@@ -1591,9 +1569,9 @@ static void osdElementSpam(osdElementParms_t *element)
         tfp_sprintf(element->buff, "END");
         break;
     default:
-        tfp_sprintf(element->buff, "Val: %s", state);
+        tfp_sprintf(element->buff, "Val: %s", spamConfig()->value, spamConfig()->value2);
         break;
-    }
+    }*/
 }
 
 #ifdef USE_RTC_TIME
