@@ -74,7 +74,7 @@
 #include "io/vtx.h"
 #include "io/vtx_control.h"
 #include "io/vtx_rtc6705.h"
-
+#include "pg/spam.h"
 #include "osd/osd.h"
 
 #include "pg/adc.h"
