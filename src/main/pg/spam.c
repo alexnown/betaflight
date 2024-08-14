@@ -1,3 +1,5 @@
+#include "platform.h"
+
 #include "pg/pg.h"
 #include "pg/pg_ids.h"
 
