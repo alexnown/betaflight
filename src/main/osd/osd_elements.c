@@ -161,6 +161,7 @@
 
 #include "pg/motor.h"
 #include "pg/stats.h"
+#include "pg/spam.h"
 
 #include "rx/rx.h"
 
@@ -1549,9 +1550,9 @@ static void osdElementRssi(osdElementParms_t *element)
 
 static void osdElementSpam(osdElementParms_t *element)
 {
-    //tfp_sprintf(element->buff, "Val: %s, %c", spamConfig()->value, spamConfig()->value2);
-    uint16_t state = getSpamOSDState();
-    tfp_sprintf(element->buff, "Val: %s", state);
+    tfp_sprintf(element->buff, "Val: %s, %c", spamConfig()->value, spamConfig()->value2);
+    //uint16_t state = getSpamOSDState();
+    //tfp_sprintf(element->buff, "Val: %s", state);
     /*switch (state)
     {
     case 2:
