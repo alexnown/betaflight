@@ -6,4 +6,4 @@
 #include "io/spam.h"
 #include "spam.h"
 
-PG_REGISTER_WITH_RESET_TEMPLATE(spamConfig_t, spamConfig, PG_SPAM_CONFIG, 0);
+PG_REGISTER(spamConfig_t, spamConfig, PG_SPAM_CONFIG, 0);
