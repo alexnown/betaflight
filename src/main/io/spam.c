@@ -38,7 +38,7 @@ static void spamDataReceive(uint16_t c, void *data)
 {
     _receivedData = c;
     spamFrameData_t *frameData = data;
-    _receivedData2 = frameData->frame.frame->syncByte;
+    _receivedData2 = frameData->frame.frame.syncByte;
 }
 
 uint16_t getSpamOSDState(void) {
