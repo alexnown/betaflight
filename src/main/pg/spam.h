@@ -1,8 +1,6 @@
 #pragma once
 
 #include "pg/pg.h"
-#include "io/spam.h"
-#include "drivers/io_types.h"
 
 typedef struct spamConfig_s {
     uint16_t value;
