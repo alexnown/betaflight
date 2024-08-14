@@ -31,14 +31,12 @@ void spamInit(void) {
 }
 
 bool changeDebugAuxValue(int ch) {
+    UNUSED(ch);
     return false;//ch>=6 && ch<=8;
 }
 float getDebugAuxValue(int ch) {
-    switch (ch)
-    {
-    default:
-        return 999;
-    }
+    UNUSED(ch);
+    return 999;
 }
 
 void spamUpdate(timeUs_t currentTimeUs) {
