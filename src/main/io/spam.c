@@ -1,4 +1,5 @@
 #include "spam.h"
+#include "pg/spam.h"
 #include "io/serial.h"
 #include "fc/rc_modes.h"
 
