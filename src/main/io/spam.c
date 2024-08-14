@@ -4,16 +4,45 @@
 #include "fc/rc_modes.h"
 
 static serialPort_t *spamPort;
-uint8_t _spam_value;
+uint16_t _receivedData;
+uint16_t _receivedData2;
+typedef struct spamFractialsData_s {
+    unsigned int chan0 : 2;
+    unsigned int chan1 : 2;
+    unsigned int chan2 : 2;
+    unsigned int chan3 : 2;
+} __attribute__((__packed__)) spamFractialsData_t;
+
+#define SPAM_DATA_LENGTH sizeof(spamFractialsData_t)
+
+struct spamFrame_s {
+    uint8_t syncByte;
+    spamFractialsData_t data;
+} __attribute__ ((__packed__));
+
+typedef union spamFrame_u {
+    uint8_t bytes[2];
+    struct spamFrame_s frame;
+} spamFrame_t;
+
+typedef struct spamFrameData_s {
+    spamFrame_t frame;
+    //wtf
+    timeUs_t startAtUs;
+    uint8_t position;
+    bool done;
+} spamFrameData_t;
+
 
 static void spamDataReceive(uint16_t c, void *data)
 {
-    UNUSED(data);
-    spamConfigMutable()->value = c;
+    _receivedData = c;
+    spamFrameData_t *frameData = data;
+    _receivedData2 = frameData->frame.frame->syncByte;
 }
 
 uint16_t getSpamOSDState(void) {
-    return spamConfig()->value;
+    return _receivedData;
 }
 
 void spamInit(void) {
@@ -34,13 +63,15 @@ void spamInit(void) {
 
 bool changeDebugAuxValue(int ch) {
     UNUSED(ch);
-    return ch>=6 && ch<=6;
+    return ch>=6 && ch<=7;
 }
 float getDebugAuxValue(int ch) {
     //UNUSED(ch);
     switch(ch) {
         case 6:
-        return 1001+_spam_value;
+        return 1000+_receivedData;
+        case 7:
+        return 1000+_receivedData2;
     }
     return 999;
 }
