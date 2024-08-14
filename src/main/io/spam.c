@@ -12,7 +12,7 @@ static void spamDataReceive(uint16_t c, void *data)
 }
 
 uint16_t getSpamOSDState(void) {
-    return spamConfig()->value;
+    return _spam_value;// spamConfig()->value;
 }
 
 void spamInit(void) {
@@ -36,7 +36,7 @@ bool changeDebugAuxValue(int ch) {
     return ch>=6 && ch<=6;
 }
 float getDebugAuxValue(int ch) {
-    UNUSED(ch);
+    //UNUSED(ch);
     switch(ch) {
         case 6:
         return 1001+_spam_value;
