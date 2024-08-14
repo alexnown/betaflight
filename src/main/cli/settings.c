@@ -740,7 +740,7 @@ const clivalue_t valueTable[] = {
     { "baro_i2c_address",           VAR_UINT8  | HARDWARE_VALUE, .config.minmaxUnsigned = { 0, I2C_ADDR7_MAX }, PG_BAROMETER_CONFIG, offsetof(barometerConfig_t, baro_i2c_address) },
     { PARAM_NAME_BARO_HARDWARE,     VAR_UINT8  | MASTER_VALUE | MODE_LOOKUP, .config.lookup = { TABLE_BARO_HARDWARE }, PG_BAROMETER_CONFIG, offsetof(barometerConfig_t, baro_hardware) },
 #endif
-    { "spam_value",                VAR_INT8   | MASTER_VALUE, .config.minmax = { 0, 200 }, PG_SPAM_CONFIG, offsetof(spamConfig_t, _spam_value) },
+    { "spam_value",                VAR_INT8   | MASTER_VALUE, .config.minmax = { 0, 200 }, PG_SPAM_CONFIG, offsetof(spamConfig_t, value) },
 // PG_RX_CONFIG
     { "mid_rc",                     VAR_UINT16 | MASTER_VALUE, .config.minmaxUnsigned = { 1200, 1700 }, PG_RX_CONFIG, offsetof(rxConfig_t, midrc) },
     { "min_check",                  VAR_UINT16 | MASTER_VALUE, .config.minmaxUnsigned = { PWM_PULSE_MIN, PWM_PULSE_MAX }, PG_RX_CONFIG, offsetof(rxConfig_t, mincheck) },
