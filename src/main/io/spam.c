@@ -3,6 +3,7 @@
 #include "fc/rc_modes.h"
 
 static serialPort_t *spamPort;
+uint8_t _spam_value;
 
 static void spamDataReceive(uint16_t c, void *data)
 {
@@ -32,10 +33,14 @@ void spamInit(void) {
 
 bool changeDebugAuxValue(int ch) {
     UNUSED(ch);
-    return false;//ch>=6 && ch<=8;
+    return ch>=6 && ch<=6;
 }
 float getDebugAuxValue(int ch) {
     UNUSED(ch);
+    switch(ch) {
+        case 6:
+        return 1001+_spam_value;
+    }
     return 999;
 }
 
