@@ -12,7 +12,7 @@ static void spamDataReceive(uint16_t c, void *data)
 }
 
 uint16_t getSpamOSDState(void) {
-    return _spam_value;// spamConfig()->value;
+    return spamConfig()->value;
 }
 
 void spamInit(void) {
